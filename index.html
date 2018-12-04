@@ -1,12 +1,16 @@
-<div class="bootstrapiso" id="calculator">
-  <script>var fuelPrice = 3.241</script>
+<div class="bootstrapiso" >
+  <script>var fuelPrice = 3.041</script>
   <div class="openCalculator">
     <button class="btn btn-lg btn-primary" onclick="setCalculatorVisibility(true)">Calculate Your Earnings</button>
-    <p>*Your results will vary.</p>
+    <p><i>Your results depend on your work ethic</i></p>
   </div>
   <br />
-  <div class="calculator">
-    <form class="form-signin antijump-wrapper" id="soloCalcForm">
+  <div class="calculator" style="display: none;">
+    <div style="text-align: center;">
+      <h3>Solo's</h3>
+      <h3>Earnings Calculator</h3>
+    </div>
+    <form class="form-signin antijump-wrapper" id="calculator">
       <label class="my-1 mr-2">Equipment Type</label>
       <div class="form-group btn-block btn-group btn-group-toggle" data-toggle="buttons">
         <label class="btn btn-secondary active">
@@ -31,16 +35,16 @@
           <input type="radio" name="runType" value="longHaul" autocomplete="off">Long Haul
         </label>
       </div>
-      <label class="my-1 mr-2">Experience Negotiating Rates</label>
+      <label class="my-1 mr-2">Experience Booking Loads</label>
       <div class="form-group btn-block btn-group btn-group-toggle" data-toggle="buttons">
         <label class="btn btn-secondary active">
-          <input type="radio" name="negotiatingSkill" checked value="novice" autocomplete="off">Novice
+          <input type="radio" name="loadBookingSkill" checked value="novice" autocomplete="off">Novice
         </label>
         <label class="btn btn-secondary">
-          <input type="radio" name="negotiatingSkill" value="experienced" autocomplete="off">Experienced
+          <input type="radio" name="loadBookingSkill" value="experienced" autocomplete="off">Experienced
         </label>
         <label class="btn btn-secondary">
-          <input type="radio" name="negotiatingSkill" value="pro" autocomplete="off">Pro Negotiator
+          <input type="radio" name="loadBookingSkill" value="pro" autocomplete="off">Pro
         </label>
       </div>
       <!-- <div class="form-group">
@@ -49,17 +53,16 @@
         <label for="weeklyMiles">500</label>
         <label class="float-right" for="weeklyMiles">3500</label>
       </div> -->
-      <div class="form-row">
-        <div class="form-label-group col">
-          <input required type="number" pattern="[0-9]*" inputmode="numeric" id="weeklyMiles" name="weeklyMiles" class="form-control" placeholder="Weekly Avg Miles">
-          <label for="weeklyMiles">Weekly Avg Miles</label>
-          <div class="invalid-feedback">How many miles do you run a week?</div>
-        </div>
-        <div class="form-label-group col">
-          <input required type="number" pattern="[0-9]*" inputmode="numeric" step="0.01" id="truckMpg" name="truckMpg" class="form-control" placeholder="Truck MPG">
-          <label for="truckMpg">Truck MPG</label>
-          <div class="invalid-feedback">How many MPG does your truck get?</div>
-        </div>
+      <div class="form-group">
+        <label class="my-1" for="weeklyMiles">Weekly Miles</label>
+        <input required type="tel" id="weeklyMiles" name="weeklyMiles" class="form-control" placeholder="Example: 3,200" data-mask="0,000" data-mask-reverse="true">
+        <div class="invalid-feedback">How many miles do you run a week?</div>
+      </div>
+
+      <div class="form-group">
+        <label class="my-1" for="truckMpg">Truck MPG</label>
+        <input required type="tel" id="truckMpg" name="truckMpg" class="form-control" placeholder="Example: 6.9" data-mask="0.0">
+        <div class="invalid-feedback">How many MPG does your truck get?</div>
       </div>
       <!-- <div class="form-group">
         <label for="truckMpg">Truck MPG: 8.00</label>
@@ -96,12 +99,10 @@
         </label>
       </div>
       <label for="isNeedingBobtailInsurance">I need Bobtail Insurance.</label>
-      <div class="form-group antijump-wrapper" id="equipmentValueGroup">
-        <div class="form-label-group">
-          <input type="number" pattern="[0-9]*" inputmode="numeric" id="equipmentValue" name="equipmentValue" class="form-control" placeholder="$ Value of Truck">
-          <label for="equipmentValue">$ Value of Truck</label>
+      <div class="form-group" id="equipmentValueGroup">
+          <label class="my-1" for="equipmentValue">Value of Truck:</label>
+          <input type="tel" id="equipmentValue" name="equipmentValue" class="form-control" placeholder="Example: 50,000" data-mask="000,000" data-mask-reverse="true">
           <div class="invalid-feedback">How much your equipment is worth? A rough dollar estimate is fine.</div>
-        </div>
         <!-- <label for="equipmentValue">Value of Truck: $500</label>
         <input type="range" class="form-control-range" name="equipmentValue" value="500" min="500" max="250000" step="500" id="equipmentValue">
         <label for="equipmentValue">$500</label>
@@ -114,29 +115,40 @@
           <div class="invalid-feedback">Enter your email so we can discuss your results.</div>
           <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email.</small> -->
         </div>
+      </div>
+      <div class="form-row">
         <div class="form-label-group col">
-          <input required type="text" id="firstName" name="firstName" class="form-control" placeholder="First Name">
-          <label for="firstName">First Name</label>
+          <input required type="text" id="fullName" name="fullName" class="form-control" placeholder="Full Name">
+          <label for="fullName">Full Name</label>
           <div class="invalid-feedback">What should we call you?</div>
-          <!-- <small id="firstNameHelp" class="form-text text-muted">So we know what to call you!</small> -->
+          <!-- <small id="fullNameHelp" class="form-text text-muted">So we know what to call you!</small> -->
         </div>
       </div>
       <button class="btn btn-lg btn-primary btn-block" name="calculate" id="calculate" type="submit" data-toggle="modal" data-target="#resultModal">Calculate</button>
-      <p>*Your results will vary.</p>
-      <div class="modal fade" id="resultModal" tabindex="-1" role="dialog" aria-labelledby="resultModalTitle" aria-hidden="true">
+      <p><i>Your results depend on your work ethic</i></p>
+      <div class="modal fade" data-backdrop="static" id="resultModal" tabindex="-1" role="dialog" aria-labelledby="resultModalTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
+          <div class="modal-content text-center">
             <div class="modal-header">
-              <h5 class="modal-title mx-auto" id="resultModalTitle">Net Weekly Pay After Deductions</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <h1 class="modal-body mx-auto" id="result"></h1>
-            <div class="modal-footer btn-group">
-              <button type="button" class="btn btn-secondary" onclick="setCalculatorVisibility(false)" data-dismiss="modal">Keep Reading</button>
-              <button type="button" class="btn btn-primary" onclick="Calendly.showPopupWidget('https://calendly.com/armando-solotrucking/learn-about-solo', 'PopupWidget')">Give Us A Call</button>
-              <button type="button" class="btn btn-success" onclick="window.open('https://intelliapp.driverapponline.com/c/SOLOTRUCKING?uri_b=ia_solotrucking_247090839')">Apply Now</button>
+            <div class="modal-body mx-auto">
+              <p class="mb-1">Yearly Gross Earnings:</p>
+              <h2 id="result-modal-yearlygross"></h2>
+              <p class="mb-1 mt-3">Weekly amount that hits your bank:</p>
+              <h1 id="result-modal-netpay"></h1>
+            </div>
+            <div class="modal-footer">
+              <div class="col mb-3">
+                <!-- <button type="button" class="btn btn-secondary btn-block" onclick="setCalculatorVisibility(false)" data-dismiss="modal">Check if you Qualify</button> -->
+                <a href="tel:+18882462096" role="button" class="btn btn-primary btn-block">Call Travis: (888) 246-2096</a>
+                <button type="button" class="btn btn-outline-primary btn-block" onclick="setCalculatorVisibility(false); Calendly.showPopupWidget('https://calendly.com/solo-recruiting/talk-with-travis', 'PopupWidget')">Schedule Call</button>
+                <p class="text-center mt-1 mb-1">- OR -</p>
+                <a href="https://intelliapp.driverapponline.com/c/SOLOTRUCKING?uri_b=ia_solotrucking_247090839" role="button" class="btn btn-primary btn-block">Apply Now</a>
+                <a href="https://solotrucking.com/pre-qualification" role="button" class="btn btn-outline-primary btn-block">Check if you Qualify</a>
+              </div>
             </div>
           </div>
         </div>
@@ -146,6 +158,9 @@
 </div>
 
 <style>
+  .modal.fade.show {
+    background: rgba(0, 0, 0, 0.6);;
+  }
   .bootstrapiso { /* also isolates boostrap styles*/
     height: 100%;
     padding-top: 40px;
@@ -169,29 +184,36 @@
     justify-content: center;
     width: 100%;
     max-width: 420px;
-    /* padding: 15px; */
+    padding: 10px;
     margin: 0 auto;
+    background: #d6d6d6;
   }
   .bootstrapiso .antijump-wrapper {
-    height: 0;
+    /* height: 0; */
     overflow: hidden;
     transition: height 0.5s ease-out;
   }
   .bootstrapiso .antijump-wrapper.showcalc {
-    height: 850px;
+    /* height: 850px; */
   }
   .bootstrapiso .antijump-wrapper.show {
     height: 70px;
   }
   .bootstrapiso .btn-secondary.active {
-    background-color: #484848 !important;
+    background-color: #37a337 !important;
+    border-color: #37a337 !important;
+  }
+  .bootstrapiso .btn-secondary {
+    background-color: #979797 !important;
+    border-color: #979797 !important;
   }
   .bootstrapiso .form-label-group {
     position: relative;
     margin-bottom: 1rem;
   }
-  .bootstrapiso .form-label-group > input,.form-label-group > label {
+  .bootstrapiso .form-label-group > input, .form-label-group > label, .bootstrapiso .form-group > input {
     padding: var(--input-padding-y) var(--input-padding-x);
+    border-radius: 0px;
   }
   .bootstrapiso .form-label-group > label {
     position: absolute;
@@ -231,18 +253,23 @@
     font-size: 12px;
     color: #777;
   }
+  .bootstrapiso .btn.btn-lg, .bootstrapiso .btn {
+    border-radius: 0px !important;
+  }
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cryptoapi/Isolate-Bootstrap-4.1-CSS-Themes/css4.1/bootstrapcustom.min.css" crossorigin="anonymous">
 
 <script>
-  var form = document.getElementById("soloCalcForm")
+  var form = document.getElementById("calculator")
+  var openCalculatorContainer = document.querySelector(".openCalculator");
+  var calculatorFormContainer = document.querySelector(".calculator");
   function setCalculatorVisibility (isVisible) {
     if (isVisible) {
-      form.classList.add("showcalc")
-      document.querySelector(".openCalculator").style.display = "none"
+      calculatorFormContainer.style.display = "block"
+      openCalculatorContainer.style.display = "none"
     } else {
-      form.classList.remove("showcalc")
-      document.querySelector(".openCalculator").style.display = ""
+      calculatorFormContainer.style.display = "none"
+      openCalculatorContainer.style.display = ""
     }
   }
 
@@ -264,41 +291,42 @@
   form.calculate.onclick = function (event) {
     var equipmentType = String(form.equipmentType.value)
     var runType = String(form.runType.value)
-    var negotiatingSkill = String(form.negotiatingSkill.value)
-    var weeklyMiles = Number(form.weeklyMiles.value)
-    var truckMpg = Number(form.truckMpg.value)
+    var loadBookingSkill = String(form.loadBookingSkill.value)
+    var weeklyMiles = Number($("#weeklyMiles").cleanVal())
+    var truckMpg = Number($("#truckMpg").val())
     var bobtail = Boolean(form.isNeedingBobtailInsurance.value  === "true")
-    var equipmentValue = Number(form.equipmentValue.value)
+    var equipmentValue = Number($("#equipmentValue").cleanVal())
     var email = String(form.email.value)
-    var firstName =  String(form.firstName.value)
-    var params = {equipmentType, runType, negotiatingSkill, weeklyMiles, truckMpg, bobtail, equipmentValue, email, firstName}
+    var fullName =  String(form.fullName.value)
+    var params = {equipmentType, runType, loadBookingSkill, weeklyMiles, truckMpg, bobtail, equipmentValue, email, fullName}
 
     try {
       validate(params, event) // may display error then throw
     } catch (errors) {
-      slack({text: "ERRORS: ```" + errors + "```\n" + "PARAMS: ```" + JSON.stringify(params) + "```"})
+      slack({text: "ERRORS: ```" + errors + "```\n" + "PARAMS: ```" + JSON.stringify(params, null, 2) + "```"})
       throw errors
     }
     // setCalculatorVisibility(false)
 
-    var deadheadPct = {local: 0.15, regional: 0.125, longHaul: 0.10}[runType]
-    var runTypeAdjustmentPct = ({local: 1.10, regional: 1.00, longHaul: 0.95})[runType]
-    var negotiationAdjustmentPct = ({novice: 0.90, experienced: 1.00, pro: 1.10})[negotiatingSkill]
-    var ratePerMile = 2.5 * runTypeAdjustmentPct * negotiationAdjustmentPct
+    var deadheadPct = {local: 0.14, regional: 0.12, longHaul: 0.10}[runType]
+    var runTypeAdjustmentPct = ({local: 1.05, regional: 1.00, longHaul: 0.95})[runType]
+    var negotiationAdjustmentPct = ({novice: 0.90, experienced: 1.00, pro: 1.10})[loadBookingSkill]
+    var ratePerMile = 2.55 * runTypeAdjustmentPct * negotiationAdjustmentPct
     var loadedMiles = weeklyMiles * (1 - deadheadPct)
     var gross = loadedMiles * ratePerMile
     var toTruck = gross * 0.75
     var fuel = weeklyMiles / truckMpg * fuelPrice
     var occAcc = 35
     var eld = 7
-    var escrow = 100
+    var escrow = 0
     var trailer = Boolean(form.isRentingTrailer.value === "true") ? 250 : 0
-    var plates = Boolean(form.isRentingPlates.value  === "true") ? 100 : 0
+    var plates = Boolean(form.isRentingPlates.value  === "true") ? 40 : 0
     var insurance = equipmentValue * (bobtail ? 0.06 / 52 : 0)
     var netPay = toTruck - fuel - occAcc - eld - escrow - trailer - plates - insurance
 
-    document.getElementById("result").innerText = money(netPay)
-    slack({text: "PARAMS: ```" + JSON.stringify({email,firstName,netPay,runType,weeklyMiles,deadheadPct,negotiatingSkill,ratePerMile,loadedMiles,gross,toTruck,fuelPrice,fuel,occAcc,eld,escrow,truckMpg,trailer,plates,equipmentValue,insurance,equipmentType}) + "```"})
+    document.getElementById("result-modal-netpay").innerText = money(netPay)
+    document.getElementById("result-modal-yearlygross").innerText = money(gross * 50)
+    slack({text: "PARAMS: ```" + JSON.stringify({email,fullName,netPay,runType,weeklyMiles,deadheadPct,loadBookingSkill,ratePerMile,loadedMiles,gross,toTruck,fuelPrice,fuel,occAcc,eld,escrow,truckMpg,trailer,plates,equipmentValue,insurance,equipmentType}, null, 2) + "```"})
   }
   function changeEquipmentForEquipmentValue () {
     if (form.isNeedingBobtailInsurance.value === "true") {
@@ -308,9 +336,9 @@
       document.getElementById("equipmentValueGroup").classList.remove("show")
       form.equipmentValue.required = false
     }
-    var equipmentString = Boolean(form.isRentingTrailer.value === "true") ? "Truck & Trailer" : "Truck"
-    form.equipmentValue.labels[0].innerText = `$ Value of ${equipmentString}`
-    form.equipmentValue.placeholder = `$ Value of ${equipmentString}`
+    var equipmentString = Boolean(form.isRentingTrailer.value === "true") ?  "Truck" : "Truck & Trailer"
+    form.equipmentValue.labels[0].innerText = `Value of ${equipmentString}:`
+    // form.equipmentValue.placeholder = `$ Value of ${equipmentString}`
     // form.equipmentValue.labels[0].innerText = `Value of ${equipmentString}: ` + money(form.equipmentValue.value)
   }
   function money (number) {
@@ -344,9 +372,9 @@
       event.stopPropagation()
       errors.push("equipmentValue: " + params.bobtail + params.equipmentValue)
     }
-    if (!params.firstName) {
+    if (!params.fullName) {
       event.stopPropagation()
-      errors.push("firstName: " + params.firstName)
+      errors.push("fullName: " + params.fullName)
     }
     if (!params.email) {
       event.stopPropagation()
@@ -359,3 +387,4 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js" crossorigin="anonymous"></script>
