@@ -318,7 +318,8 @@
   }
 
   function slack(data, callback) {
-    if (!location.href.includes(".com")) return console.log("Slack! " + JSON.stringify(data))
+    if (window.location.href.includes("https://solotrucking.github.io/calculator")) return console.log("admin Slack! " + JSON.stringify(data))
+    if (window.location.href.includes("file:///")) return console.log("dev Slack! " + JSON.stringify(data))
     callback = callback || function () { /* no-op */ }
     var request = new XMLHttpRequest()
     request.onreadystatechange = () => request.readyState == 4 && String(request.status)[0] == 2 && callback(request.responseText)
@@ -327,6 +328,8 @@
   }
 
   function validate (params, event) {
+    if (window.location.href.includes("https://solotrucking.github.io/calculator")) return console.warn("admin skipping validation")
+    // if (window.location.href.includes("file:///")) return console.warn("dev skipping validation")
     form.classList.add("was-validated")
     const errors = []
     if (!params.weeklyMiles || isNaN(params.weeklyMiles)) {
